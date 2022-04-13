@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>main</artifactId>
+        <groupId>com.tophant.component</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.example</groupId>
+    <artifactId>APIEDemo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <description>API资产识别与管理</description>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <java.version>11</java.version>
+        <component.version>2.0.0-SNAPSHOT</component.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tophant.component</groupId>
+            <artifactId>tophant-spring-boot-starter-web</artifactId>
+            <version>${component.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tophant.component</groupId>
+            <artifactId>tophant-spring-boot-starter</artifactId>
+            <version>${component.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tophant.component</groupId>
+            <artifactId>tophant-spring-boot-starter-log</artifactId>
+            <version>${component.version}</version>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>com.tophant.component</groupId>
+            <artifactId>tophant-spring-boot-starter-mybatis</artifactId>
+            <version>${component.version}</version>
+        </dependency>-->
+
+        <!--redis-->
+        <!--<dependency>
+            <groupId>com.tophant.component</groupId>
+            <artifactId>tophant-spring-boot-starter-redis</artifactId>
+            <version>${component.version}</version>
+        </dependency>-->
+
+        <!--storage-->
+        <!--<dependency>
+            <groupId>com.tophant.component</groupId>
+            <artifactId>tophant-spring-boot-starter-file-storage</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
+        </dependency>-->
+
+        <!--<dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>0.3.2</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.4</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.0.3</version>
+        </dependency>-->
+
+        <!--<dependency>
+            <groupId>com.tophant</groupId>
+            <artifactId>auth-client</artifactId>
+            <version>4.3.0.7</version>
+        </dependency>-->
+        <!--json-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.79</version>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.2</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.31</version>
+        </dependency>
+
+        <!--单元测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.5.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--<plugin>
+                <groupId>cn.dreampie</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <config>${basedir}/src/main/resources/flyway.properties</config>
+                    &lt;!&ndash;sql脚本目录 多个数据库 按数据源名字创建文件夹  如：db/migration/default,db/migration/demo 配置只需要到migration目录&ndash;&gt;
+                    <location>filesystem:${basedir}/src/main/resources/db/migration/</location>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>com.tophant.apie.ApieThetisApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--公司maven仓库下载-->
+    <repositories>
+        <repository>
+            <id>tophant-public</id>
+            <name>tophant-public</name>
+            <url>http://mirrors.tophant.com/repository/maven-public/</url>
+            <!--snapshots更新策略-->
+            <snapshots>
+                <enabled>true</enabled>
+                <!-- always 每次构建都检查远程仓库中该依赖jar包是否有更新-->
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <name>Propellors Snapshots</name>
+            <url>http://10.0.80.121:8081/repository/maven-releases/</url>
+        </repository>
+    </repositories>
+
+</project>
