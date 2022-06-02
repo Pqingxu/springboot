@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.mapper.UserMapper">
+
+    <resultMap id="BaseResult" type="com.pan.entry.pojo.User">
+        <id column="id" property="id"/>
+        <result column="uuid" property="uuid"/>
+        <result column="username" property="username"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,uuid,username,age
+    </sql>
+    
+    <select id="mySelectUserById"  resultMap="BaseResult" parameterType="Long" >
+        select <include refid="Base_Column_List"/>
+        from USER where id = #{id}
+    </select>
+
+</mapper>

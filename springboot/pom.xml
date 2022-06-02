@@ -11,6 +11,8 @@
     <modules>
         <module>helloword</module>
         <module>mybatisplus</module>
+        <module>JavaBase</module>
+        <module>PTool</module>
     </modules>
 
     <parent>
